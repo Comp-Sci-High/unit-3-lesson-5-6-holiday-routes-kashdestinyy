@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Valentine's Day — Love & Roses</title>
+  <link rel="stylesheet" href="./valentine.css">
+</head>
+<body>
+  <nav class="nav-bar">
+    <a href="valentine.html" class="nav-link active">Facts</a>
+    <a href="game.html" class="nav-link">Game</a>
+    <a href="anti-valentine.html" class="nav-link">Anti-Valentine</a>
+  </nav>
+
+  <header class="header" id="siteHeader">
+    <div class="title-container">
+      <h1 class="title" id="mainTitle">Happy Valentine's Day</h1>
+      <p class="subtitle">Love, roses, and thoughtful gifts</p>
+    </div>
+    <div id="score">Hearts Popped: 0</div>
+  </header>
+
+  <main class="content">
+    <section class="hero card" role="region" aria-label="Intro">
+      <h2 id="welcome-header">Welcome</h2>
+      <p class="lead">A beautiful, educational look at Valentine's Day — facts about chocolates, roses, and popular gifts.</p>
+    </section>
+
+    <section class="facts-grid">
+      <article class="fact card fact-1">
+        <div class="fact-body">
+          <h3 class="fact-header">Roses</h3>
+          <p>Roses are the most popular flower for Valentine's Day. Red roses symbolize love and passion, while pink roses represent admiration and gratitude.</p>
+        </div>
+        <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=300&h=200&fit=crop" alt="Beautiful pink roses" class="fact-image">
+      </article>
+      <article class="fact card fact-2">
+        <div class="fact-body">
+          <h3 class="fact-header">Chocolates</h3>
+          <p>Chocolates are a classic gift, with heart-shaped boxes being especially popular. Dark chocolate is often preferred for its health benefits.</p>
+        </div>
+        <img src="https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=300&h=200&fit=crop" alt="Delicious chocolates" class="fact-image">
+      </article>
+      <article class="fact card fact-3">
+        <div class="fact-body">
+          <h3 class="fact-header">Most Popular Gifts</h3>
+          <ul>
+            <li>Flowers (roses)</li>
+            <li>Chocolates & sweets</li>
+            <li>Greeting cards</li>
+            <li>Jewelry</li>
+            <li>Dinner dates</li>
+          </ul>
+        </div>
+        <img src="https://images.unsplash.com/photo-1513884923967-4b182ef167ab?w=300&h=200&fit=crop" alt="Valentine's Day gifts" class="fact-image">
+      </article>
+      <article class="fact card fact-4">
+        <div class="fact-body">
+          <h3 class="fact-header">Fun Fact</h3>
+          <p>Valentine's Day generates billions in sales worldwide, with a significant portion on flowers and sweets.</p>
+        </div>
+        <img src="https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?w=300&h=200&fit=crop" alt="Valentine's Day celebration" class="fact-image">
+      </article>
+      <article class="fact card fact-5">
+        <div class="fact-body">
+          <h3 class="fact-header">History of Valentine's Day</h3>
+          <p>Valentine's Day originated from the Roman festival of Lupercalia and the martyrdom of Saint Valentine. It became associated with romantic love in the Middle Ages.</p>
+        </div>
+        <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=300&h=200&fit=crop" alt="Historical Valentine's Day" class="fact-image">
+      </article>
+      <article class="fact card fact-6">
+        <div class="fact-body">
+          <h3 class="fact-header">Other Traditions</h3>
+          <p>Beyond cards and gifts, traditions include love poems, serenades, and in some cultures, exchanging locks or keys symbolizing commitment.</p>
+        </div>
+        <img src="https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?w=300&h=200&fit=crop" alt="Valentine's traditions" class="fact-image">
+      </article>
+      <article class="fact card fact-7">
+        <div class="fact-body">
+          <h3 class="fact-header">Global Celebrations</h3>
+          <p>While popular in the West, Valentine's Day is celebrated worldwide with unique twists, like in Japan where women give chocolates to men.</p>
+        </div>
+        <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?w=300&h=200&fit=crop" alt="Earth from space representing global celebrations" class="fact-image">
+      </article>
+      <article class="fact card fact-8">
+        <div class="fact-body">
+          <h3 id="love-symbols-header" class="fact-header">Love Symbols</h3>
+          <p>Hearts, doves, Cupid's arrows, and infinity symbols are common motifs representing eternal love and affection.</p>
+        </div>
+        <img src="https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=300&h=200&fit=crop" alt="Love symbols" class="fact-image">
+      </article>
+    </section>
+
+    <section class="deep-info card">
+      <h3>The Story of Valentine's Gifts</h3>
+      <p>From handwritten notes to elaborate experiences, the ways we celebrate have evolved. Chocolate boxes, bouquets of roses, and heartfelt cards continue to be enduring favorites.</p>
+      <p>Tip: pairing a thoughtful card with a small box of chocolates and a single rose can be more meaningful than expensive gifts.</p>
+    </section>
+
+    <section class="interactive-themes card">
+      <h3>Interactive Love Themes</h3>
+      <div class="theme-generator">
+        <h4>Love Message Generator</h4>
+        <input type="text" id="nameInput" placeholder="Enter your name" class="input-field">
+        <button id="generateBtn" class="btn">Generate Love Message</button>
+        <p id="loveMessage" class="generated-message"></p>
+      </div>
+      <div class="theme-quiz">
+        <h4>Valentine's Compatibility Quiz</h4>
+        <p>Answer these questions to see your love style!</p>
+        <div class="quiz-question">
+          <p>What’s your favorite Valentine's gift?</p>
+          <select id="giftSelect" class="input-field">
+            <option value="">Select...</option>
+            <option value="flowers">Flowers</option>
+            <option value="chocolates">Chocolates</option>
+            <option value="jewelry">Jewelry</option>
+            <option value="experience">A special experience</option>
+          </select>
+        </div>
+        <div class="quiz-question">
+          <p>What's your ideal Valentine's date?</p>
+          <select id="dateSelect" class="input-field">
+            <option value="">Select...</option>
+            <option value="dinner">Romantic dinner</option>
+            <option value="home">Cozy night at home</option>
+            <option value="adventure">Adventure or outing</option>
+            <option value="surprise">Surprise me!</option>
+          </select>
+        </div>
+        <div class="quiz-question">
+          <p>How do you express love?</p>
+          <select id="expressSelect" class="input-field">
+            <option value="">Select...</option>
+            <option value="words">Words of affirmation</option>
+            <option value="acts">Acts of service</option>
+            <option value="gifts">Giving gifts</option>
+            <option value="time">Quality time</option>
+            <option value="touch">Physical touch</option>
+          </select>
+        </div>
+        <div class="quiz-question">
+          <p>What's your favorite way to celebrate love?</p>
+          <select id="celebrateSelect" class="input-field">
+            <option value="">Select...</option>
+            <option value="traditional">Traditional gifts and dinner</option>
+            <option value="creative">Creative and handmade</option>
+            <option value="spontaneous">Spontaneous and fun</option>
+            <option value="intimate">Intimate and personal</option>
+          </select>
+        </div>
+        <button id="quizBtn" class="btn">Get Your Love Style</button>
+        <p id="quizResult" class="generated-message"></p>
+      </div>
+    </section>
+
+    <footer class="page-footer">Made to impress — scroll to explore the facts and visuals.</footer>
+  </main>
+
+  <section class="couples-gallery">
+    <h2>Happy Couples</h2>
+    <div class="couple-grid">
+      <div class="couple-item">
+        <h3 id="wedding-header">Wedding Bliss</h3>
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400&h=300&fit=crop" alt="Couple getting married" class="gallery-image">
+      </div>
+      <div class="couple-item">
+        <h3 id="animal-header">Parent Love</h3>
+        <img src="https://images.unsplash.com/photo-1609220136736-443140cffec6?w=400&h=300&fit=crop" alt="Parents with their baby" class="gallery-image">
+      </div>
+      <div class="couple-item">
+        <h3 id="friends-header">Best Friends Forever</h3>
+        <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=300&fit=crop" alt="High school friends in hallway" class="gallery-image">
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Interactive features for software engineering showcase
+    let score = 0;
+    const scoreDisplay = document.getElementById('score');
+    const mainTitle = document.getElementById('mainTitle');
+    
+    // Title click changes gradient speed
+    mainTitle.addEventListener('click', () => {
+      mainTitle.style.animation = 'gradientShift 0.5s ease infinite, pulse 3s infinite';
+      setTimeout(() => {
+        mainTitle.style.animation = 'gradientShift 3s ease infinite, pulse 3s infinite';
+      }, 2000);
+    });
+    
+    // Keyboard interaction: press 'L' for love burst
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'l' || e.key === 'L') {
+        for (let i = 0; i < 15; i++) {
+          setTimeout(createHeart, i * 30);
+        }
+      }
+    });
+
+    // Floating hearts animation
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'floating-heart';
+      heart.innerHTML = '♥';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 5 + 5) + 's'; // 5-10s
+      heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+      heart.style.opacity = Math.random() * 0.5 + 0.3;
+      heart.style.color = '#ff0000';
+      
+      // Random animation type with horizontal drift
+      const animType = Math.floor(Math.random() * 4);
+      const rotateDuration = (Math.random() * 3 + 2) + 's';
+      const horizontalDrift = (Math.random() - 0.5) * 200 + 'px'; // -100px to 100px
+      
+      if (animType === 0) {
+        heart.style.animationName = 'floatDown';
+        heart.style.top = '-50px';
+        heart.style.setProperty('--drift', horizontalDrift);
+      } else if (animType === 1) {
+        heart.style.animationName = 'floatUp';
+        heart.style.top = '100vh';
+        heart.style.setProperty('--drift', horizontalDrift);
+      } else if (animType === 2) {
+        heart.style.animationName = 'floatSide';
+        heart.style.top = Math.random() * 100 + 'vh';
+        heart.style.setProperty('--drift', 'calc(100vw + 50px)');
+      } else {
+        heart.style.animationName = 'floatDiagonal';
+        heart.style.top = '-50px';
+        heart.style.left = Math.random() * 50 + 'vw'; // Start from left half
+        heart.style.setProperty('--drift', 'calc(100vw + 50px)');
+      }
+      heart.style.animation = heart.style.animationName + ' linear infinite, rotate ' + rotateDuration + ' linear infinite';
+      
+      // Add click interaction with scoring
+      heart.addEventListener('click', () => {
+        score++;
+        scoreDisplay.textContent = 'Hearts Popped: ' + score;
+        heart.style.animation = 'grow 0.2s ease-out, pop 0.3s ease-out 0.2s forwards';
+        setTimeout(() => heart.remove(), 500);
+      });
+      
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 10000); // 10s
+    }
+    setInterval(createHeart, 80); // Slightly less frequent
+
+    // Love Message Generator
+    const generateBtn = document.getElementById('generateBtn');
+    const nameInput = document.getElementById('nameInput');
+    const loveMessage = document.getElementById('loveMessage');
+    const messages = [
+      "Roses are red, violets are blue, my love for you is endless and true!",
+      "You're the peanut butter to my jelly, the cheese to my macaroni!",
+      "In your eyes, I see my future, bright and full of love.",
+      "Every moment with you is a treasure I hold dear.",
+      "You make my heart skip a beat, every single day."
+    ];
+    generateBtn.addEventListener('click', () => {
+      const name = nameInput.value.trim();
+      if (name) {
+        const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+        loveMessage.textContent = `${name}, ${randomMsg}`;
+      } else {
+        loveMessage.textContent = "Please enter your name first!";
+      }
+    });
+
+    // Valentine's Compatibility Quiz
+    const quizBtn = document.getElementById('quizBtn');
+    const giftSelect = document.getElementById('giftSelect');
+    const dateSelect = document.getElementById('dateSelect');
+    const expressSelect = document.getElementById('expressSelect');
+    const celebrateSelect = document.getElementById('celebrateSelect');
+    const quizResult = document.getElementById('quizResult');
+    const quizResults = {
+      romantic: "You're a classic romantic! You love traditional gestures and heartfelt expressions of love.",
+      adventurous: "You're adventurous and spontaneous! You thrive on excitement and new experiences in love.",
+      thoughtful: "You're thoughtful and caring! You show love through actions and quality time.",
+      creative: "You're creative and unique! You express love in imaginative and personal ways.",
+      default: "You're a well-rounded lover! You appreciate many aspects of romance and connection."
+    };
+    quizBtn.addEventListener('click', () => {
+      const gift = giftSelect.value;
+      const date = dateSelect.value;
+      const express = expressSelect.value;
+      const celebrate = celebrateSelect.value;
+      
+      if (!gift || !date || !express || !celebrate) {
+        quizResult.textContent = "Please answer all questions!";
+        return;
+      }
+      
+      // Simple logic to determine love style
+      let romanticScore = 0;
+      let adventurousScore = 0;
+      let thoughtfulScore = 0;
+      let creativeScore = 0;
+      
+      if (gift === 'flowers' || gift === 'jewelry') romanticScore++;
+      if (gift === 'experience') adventurousScore++;
+      if (gift === 'chocolates') thoughtfulScore++;
+      
+      if (date === 'dinner' || date === 'home') romanticScore++;
+      if (date === 'adventure') adventurousScore++;
+      if (date === 'surprise') creativeScore++;
+      
+      if (express === 'words' || express === 'gifts') romanticScore++;
+      if (express === 'acts' || express === 'time') thoughtfulScore++;
+      if (express === 'touch') adventurousScore++;
+      
+      if (celebrate === 'traditional') romanticScore++;
+      if (celebrate === 'spontaneous') adventurousScore++;
+      if (celebrate === 'creative') creativeScore++;
+      if (celebrate === 'intimate') thoughtfulScore++;
+      
+      const maxScore = Math.max(romanticScore, adventurousScore, thoughtfulScore, creativeScore);
+      
+      if (maxScore === romanticScore) {
+        quizResult.textContent = quizResults.romantic;
+      } else if (maxScore === adventurousScore) {
+        quizResult.textContent = quizResults.adventurous;
+      } else if (maxScore === thoughtfulScore) {
+        quizResult.textContent = quizResults.thoughtful;
+      } else if (maxScore === creativeScore) {
+        quizResult.textContent = quizResults.creative;
+      } else {
+        quizResult.textContent = quizResults.default;
+      }
+    });
+
+    // Interactive Couple Headers
+    const weddingHeader = document.getElementById('wedding-header');
+    const animalHeader = document.getElementById('animal-header');
+    const friendsHeader = document.getElementById('friends-header');
+
+    weddingHeader.addEventListener('click', () => {
+      alert('Love is in the air! 💕');
+    });
+
+    animalHeader.addEventListener('click', () => {
+      alert('Parent love is the purest form! 👨‍👩‍👧');
+    });
+
+    friendsHeader.addEventListener('click', () => {
+      alert('Best friends forever! 👩‍👧');
+    });
+
+    // Interactive Headers
+    const factHeaders = document.querySelectorAll('.fact-header');
+
+    function wiggle(element) {
+      element.style.animation = 'wiggle 1s ease-in-out';
+      setTimeout(() => element.style.animation = '', 1000);
+    }
+
+    factHeaders.forEach(header => {
+      header.addEventListener('click', () => wiggle(header));
+    });
+  </script>
+</body>
+</html>

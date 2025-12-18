@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Valentine's Day Game — Find the Heart</title>
+  <link rel="stylesheet" href="./valentine.css">
+</head>
+<body>
+  <nav class="nav-bar">
+    <a href="valentine.html" class="nav-link">Facts</a>
+    <a href="game.html" class="nav-link active">Game</a>
+    <a href="anti-valentine.html" class="nav-link">Anti-Valentine</a>
+  </nav>
+
+  <header class="header" id="siteHeader">
+    <div class="title-container">
+      <h1 class="title" id="mainTitle">Valentine's Day Game</h1>
+      <p class="subtitle">Find the heart and win!</p>
+    </div>
+    <div id="score">Hearts Popped: 0</div>
+  </header>
+
+  <main class="content">
+    <section class="hero card" role="region" aria-label="Game Intro">
+      <h2 id="welcome-header">Find the Heart Game</h2>
+      <p class="lead">Three cups, one heart. Can you find where "Be Mine" is hiding?</p>
+    </section>
+
+    <section class="game-section card">
+      <div class="cups-container">
+        <div class="cup" id="cup1">☕</div>
+        <div class="cup" id="cup2">☕</div>
+        <div class="cup" id="cup3">☕</div>
+      </div>
+      <button id="shuffleBtn" class="btn">Shuffle Cups</button>
+      <p id="gameMessage" class="game-message"></p>
+    </section>
+
+    <section class="bouquet-game card">
+      <h2>Make a Bouquet Game</h2>
+      <p>Create your perfect Valentine's bouquet!</p>
+      <div id="flowerStep" class="game-step">
+        <h3>Step 1: Pick 3 Flowers</h3>
+        <div class="options">
+          <button class="flower-btn" data-color="red">🌹 Red Rose</button>
+          <button class="flower-btn" data-color="pink">🌸 Pink Rose</button>
+          <button class="flower-btn" data-color="white">🌷 White Rose</button>
+          <button class="flower-btn" data-color="black">🌹 Black Rose</button>
+        </div>
+        <p id="flowerMessage">Selected: None</p>
+      </div>
+      <div id="wrapStep" class="game-step" style="display:none;">
+        <h3>Step 2: Pick a Wrap</h3>
+        <div class="options">
+          <button class="wrap-btn" data-color="red">Red Wrap</button>
+          <button class="wrap-btn" data-color="pink">Pink Wrap</button>
+          <button class="wrap-btn" data-color="white">White Wrap</button>
+          <button class="wrap-btn" data-color="black">Black Wrap</button>
+        </div>
+        <p id="wrapMessage">Selected: None</p>
+      </div>
+      <div id="bowStep" class="game-step" style="display:none;">
+        <h3>Step 3: Pick a Bow</h3>
+        <div class="options">
+          <button class="bow-btn" data-color="red">🎀 Red Bow</button>
+          <button class="bow-btn" data-color="pink">🎀 Pink Bow</button>
+          <button class="bow-btn" data-color="white">🎀 White Bow</button>
+          <button class="bow-btn" data-color="black">🎀 Black Bow</button>
+        </div>
+        <p id="bowMessage">Selected: None</p>
+      </div>
+      <div id="bouquetResult" class="game-step" style="display:none;">
+        <h3>Your Bouquet is Ready!</h3>
+        <p id="resultMessage"></p>
+        <button id="resetBouquet" class="btn">Make Another Bouquet</button>
+      </div>
+    </section>
+
+    <section class="poem-game card">
+      <h2>Love Poem Builder</h2>
+      <p>Craft a romantic poem by choosing words!</p>
+      <div class="poem-step">
+        <h3>Your love is <span id="adj1">___</span></h3>
+        <div class="options">
+          <button class="poem-btn" data-type="adj1" data-word="beautiful">Beautiful</button>
+          <button class="poem-btn" data-type="adj1" data-word="sweet">Sweet</button>
+          <button class="poem-btn" data-type="adj1" data-word="kind">Kind</button>
+          <button class="poem-btn" data-type="adj1" data-word="amazing">Amazing</button>
+        </div>
+      </div>
+      <div class="poem-step">
+        <h3>Like a <span id="noun1">___</span> in bloom</h3>
+        <div class="options">
+          <button class="poem-btn" data-type="noun1" data-word="rose">Rose</button>
+          <button class="poem-btn" data-type="noun1" data-word="daisy">Daisy</button>
+          <button class="poem-btn" data-type="noun1" data-word="tulip">Tulip</button>
+          <button class="poem-btn" data-type="noun1" data-word="lily">Lily</button>
+        </div>
+      </div>
+      <div class="poem-step">
+        <h3>My heart beats <span id="adv">___</span> for you</h3>
+        <div class="options">
+          <button class="poem-btn" data-type="adv" data-word="faster">Faster</button>
+          <button class="poem-btn" data-type="adv" data-word="louder">Louder</button>
+          <button class="poem-btn" data-type="adv" data-word="wildly">Wildly</button>
+          <button class="poem-btn" data-type="adv" data-word="gently">Gently</button>
+        </div>
+      </div>
+      <div id="currentPoemSection">
+        <h3>Your Poem So Far:</h3>
+        <p id="currentPoem">Your love is ___ like a ___ in bloom. My heart beats ___ for you.</p>
+      </div>
+      <div id="poemResult" style="display:none;">
+        <h3>Your Love Poem:</h3>
+        <p id="finalPoem"></p>
+        <button id="resetPoem" class="btn">Create Another Poem</button>
+      </div>
+    </section>
+
+    <footer class="page-footer">Enjoy the game!</footer>
+  </main>
+
+  <script>
+    // Interactive features for software engineering showcase
+    let score = 0;
+    const scoreDisplay = document.getElementById('score');
+    const mainTitle = document.getElementById('mainTitle');
+    
+    // Title click changes gradient speed
+    mainTitle.addEventListener('click', () => {
+      mainTitle.style.animation = 'gradientShift 0.5s ease infinite, pulse 3s infinite';
+      setTimeout(() => {
+        mainTitle.style.animation = 'gradientShift 3s ease infinite, pulse 3s infinite';
+      }, 2000);
+    });
+    
+    // Keyboard interaction: press 'L' for love burst
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'l' || e.key === 'L') {
+        for (let i = 0; i < 15; i++) {
+          setTimeout(createHeart, i * 30);
+        }
+      }
+    });
+
+    // Floating hearts animation
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'floating-heart';
+      heart.innerHTML = '♥';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 5 + 5) + 's'; // 5-10s
+      heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+      heart.style.opacity = Math.random() * 0.5 + 0.3;
+      heart.style.color = Math.random() > 0.5 ? '#ff0000' : '#ff69b4'; // Red or pink for Valentine's variety
+      
+      // Random animation type with horizontal drift
+      const animType = Math.floor(Math.random() * 4);
+      const rotateDuration = (Math.random() * 3 + 2) + 's';
+      const horizontalDrift = (Math.random() - 0.5) * 200 + 'px'; // -100px to 100px
+      
+      if (animType === 0) {
+        heart.style.animationName = 'floatDown';
+        heart.style.top = '-50px';
+        heart.style.setProperty('--drift', horizontalDrift);
+      } else if (animType === 1) {
+        heart.style.animationName = 'floatUp';
+        heart.style.top = '100vh';
+        heart.style.setProperty('--drift', horizontalDrift);
+      } else if (animType === 2) {
+        heart.style.animationName = 'floatSide';
+        heart.style.top = Math.random() * 100 + 'vh';
+        heart.style.setProperty('--drift', 'calc(100vw + 50px)');
+      } else {
+        heart.style.animationName = 'floatDiagonal';
+        heart.style.top = '-50px';
+        heart.style.left = Math.random() * 50 + 'vw'; // Start from left half
+        heart.style.setProperty('--drift', 'calc(100vw + 50px)');
+      }
+      heart.style.animation = heart.style.animationName + ' linear infinite, rotate ' + rotateDuration + ' linear infinite';
+      heart.style.pointerEvents = 'auto';
+      
+      // Add click interaction with scoring
+      heart.addEventListener('click', () => {
+        score++;
+        scoreDisplay.textContent = 'Hearts Popped: ' + score;
+        if (score % 10 === 0) {
+          // Special milestone message
+          const msg = document.createElement('div');
+          msg.textContent = 'Love is in the air! 💕';
+          msg.style.position = 'fixed';
+          msg.style.top = '50%';
+          msg.style.left = '50%';
+          msg.style.transform = 'translate(-50%, -50%)';
+          msg.style.fontSize = '24px';
+          msg.style.color = '#d81b60';
+          msg.style.zIndex = '10';
+          msg.style.pointerEvents = 'none';
+          msg.style.animation = 'fadeInOut 2s ease-out forwards';
+          document.body.appendChild(msg);
+          setTimeout(() => msg.remove(), 2000);
+        }
+        heart.style.animation = 'grow 0.2s ease-out, pop 0.3s ease-out 0.2s forwards';
+        setTimeout(() => heart.remove(), 500);
+      });
+      
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 10000); // 10s
+    }
+    setInterval(createHeart, 50); // Adjusted frequency for better performance
+
+    // Find the Heart Game
+    const shuffleBtn = document.getElementById('shuffleBtn');
+    const cups = [document.getElementById('cup1'), document.getElementById('cup2'), document.getElementById('cup3')];
+    const gameMessage = document.getElementById('gameMessage');
+    let heartPosition = 0; // 0, 1, or 2
+
+    function shuffleCups() {
+      heartPosition = Math.floor(Math.random() * 3);
+      gameMessage.textContent = "Cups shuffled! Click on a cup to find the heart.";
+      cups.forEach(cup => cup.textContent = '☕');
+    }
+
+    shuffleBtn.addEventListener('click', shuffleCups);
+
+    cups.forEach((cup, index) => {
+      cup.addEventListener('click', () => {
+        cup.textContent = '♥ Be Mine!';
+        gameMessage.textContent = "Congratulations! You found the heart!";
+        score++;
+        scoreDisplay.textContent = 'Hearts Popped: ' + score;
+        setTimeout(shuffleCups, 2000); // Auto shuffle after 2 seconds
+      });
+    });
+
+    // Bouquet Game
+    let selectedFlowers = [];
+    let selectedWrap = '';
+    let selectedBow = '';
+
+    const flowerBtns = document.querySelectorAll('.flower-btn');
+    const wrapBtns = document.querySelectorAll('.wrap-btn');
+    const bowBtns = document.querySelectorAll('.bow-btn');
+    const flowerMessage = document.getElementById('flowerMessage');
+    const wrapMessage = document.getElementById('wrapMessage');
+    const bowMessage = document.getElementById('bowMessage');
+    const resultMessage = document.getElementById('resultMessage');
+    const resetBouquet = document.getElementById('resetBouquet');
+
+    flowerBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (selectedFlowers.length < 3) {
+          selectedFlowers.push(btn.dataset.color);
+          btn.classList.add('selected');
+          flowerMessage.textContent = 'Selected: ' + selectedFlowers.join(', ');
+          if (selectedFlowers.length === 3) {
+            document.getElementById('flowerStep').style.display = 'none';
+            document.getElementById('wrapStep').style.display = 'block';
+          }
+        }
+      });
+    });
+
+    wrapBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        selectedWrap = btn.dataset.color;
+        wrapBtns.forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        wrapMessage.textContent = 'Selected: ' + selectedWrap + ' Wrap';
+        document.getElementById('wrapStep').style.display = 'none';
+        document.getElementById('bowStep').style.display = 'block';
+      });
+    });
+
+    bowBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        selectedBow = btn.dataset.color;
+        bowBtns.forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        bowMessage.textContent = 'Selected: ' + selectedBow + ' Bow';
+        document.getElementById('bowStep').style.display = 'none';
+        document.getElementById('bouquetResult').style.display = 'block';
+        resultMessage.textContent = `Your bouquet: ${selectedFlowers.join(', ')} flowers wrapped in ${selectedWrap}, tied with a ${selectedBow} bow. Perfect for Valentine's Day! 💐`;
+      });
+    });
+
+    resetBouquet.addEventListener('click', () => {
+      selectedFlowers = [];
+      selectedWrap = '';
+      selectedBow = '';
+      flowerBtns.forEach(btn => btn.classList.remove('selected'));
+      wrapBtns.forEach(btn => btn.classList.remove('selected'));
+      bowBtns.forEach(btn => btn.classList.remove('selected'));
+      flowerMessage.textContent = 'Selected: None';
+      wrapMessage.textContent = 'Selected: None';
+      bowMessage.textContent = 'Selected: None';
+      document.getElementById('flowerStep').style.display = 'block';
+      document.getElementById('wrapStep').style.display = 'none';
+      document.getElementById('bowStep').style.display = 'none';
+      document.getElementById('bouquetResult').style.display = 'none';
+    });
+
+    // Poem Game
+    const poemBtns = document.querySelectorAll('.poem-btn');
+    const finalPoem = document.getElementById('finalPoem');
+    const resetPoem = document.getElementById('resetPoem');
+
+    poemBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const type = btn.dataset.type;
+        const word = btn.dataset.word;
+        document.getElementById(type).textContent = word;
+        // Update current poem
+        const adj1 = document.getElementById('adj1').textContent;
+        const noun1 = document.getElementById('noun1').textContent;
+        const adv = document.getElementById('adv').textContent;
+        document.getElementById('currentPoem').textContent = `Your love is ${adj1} like a ${noun1} in bloom. My heart beats ${adv} for you.`;
+        // Create extra hearts for fun
+        for(let i = 0; i < 20; i++) createHeart();
+        // Check if all filled
+        if(adj1 !== '___' && noun1 !== '___' && adv !== '___') {
+          finalPoem.textContent = `Your love is ${adj1} like a ${noun1} in bloom. My heart beats ${adv} for you.`;
+          document.getElementById('poemResult').style.display = 'block';
+        }
+      });
+    });
+
+    resetPoem.addEventListener('click', () => {
+      document.getElementById('adj1').textContent = '___';
+      document.getElementById('noun1').textContent = '___';
+      document.getElementById('adv').textContent = '___';
+      document.getElementById('currentPoem').textContent = 'Your love is ___ like a ___ in bloom. My heart beats ___ for you.';
+      document.getElementById('poemResult').style.display = 'none';
+    });
+
+    // Initialize game
+    shuffleCups();
+  </script>
+</body>
+</html></content>
+<parameter name="filePath">/workspaces/unit-3-lesson-5-6-holiday-routes-kashdestinyy/public/game.html

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Anti-Valentine's Day</title>
+  <link rel="stylesheet" href="./valentine.css">
+  <style>
+    body {
+      background: white !important;
+      color: black !important;
+    }
+    .nav-bar, .header, .card, .btn, .reason-btn {
+      background: white !important;
+      color: black !important;
+      border-color: black !important;
+    }
+    .title {
+      background: linear-gradient(45deg, black, white) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav-bar">
+    <a href="valentine.html" class="nav-link">Facts</a>
+    <a href="game.html" class="nav-link">Game</a>
+    <a href="anti-valentine.html" class="nav-link active">Anti-Valentine</a>
+  </nav>
+
+  <header class="header" id="siteHeader">
+    <div class="title-container">
+      <h1 class="title" id="mainTitle">Anti-Valentine's Day</h1>
+      <p class="subtitle">For those who aren't feeling the love</p>
+    </div>
+  </header>
+
+  <main class="content">
+    <section class="hero card" role="region" aria-label="Anti-Valentine Intro">
+      <h2>Why Do You Hate Valentine's Day?</h2>
+      <p>Let us know your reason!</p>
+      <div class="options">
+        <button class="reason-btn" data-reason="too many to please">Too many to please</button>
+        <button class="reason-btn" data-reason="nobody to spend it with">Nobody to spend it with</button>
+        <button class="reason-btn" data-reason="not romantic">Not romantic</button>
+        <button class="reason-btn" data-reason="other">Other</button>
+      </div>
+      <p id="selectedReason">Selected: None</p>
+    </section>
+
+    <section class="advice card">
+      <h3>Our Advice:</h3>
+      <p>Just get a bae or listen to Drake. If not, turn into future.</p>
+    </section>
+
+    <footer class="page-footer">Remember, love is everywhere!</footer>
+  </main>
+
+  <script>
+    // Interactive features
+    const mainTitle = document.getElementById('mainTitle');
+    
+    // Title click changes gradient speed
+    mainTitle.addEventListener('click', () => {
+      mainTitle.style.animation = 'gradientShift 0.5s ease infinite, pulse 3s infinite';
+      setTimeout(() => {
+        mainTitle.style.animation = 'gradientShift 3s ease infinite, pulse 3s infinite';
+      }, 2000);
+    });
+
+    // Reason selection
+    const reasonBtns = document.querySelectorAll('.reason-btn');
+    const selectedReason = document.getElementById('selectedReason');
+
+    reasonBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        reasonBtns.forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedReason.textContent = 'Selected: ' + btn.dataset.reason;
+      });
+    });
+  </script>
+</body>
+</html></content>
+<parameter name="filePath">/workspaces/unit-3-lesson-5-6-holiday-routes-kashdestinyy/public/anti-valentine.html
