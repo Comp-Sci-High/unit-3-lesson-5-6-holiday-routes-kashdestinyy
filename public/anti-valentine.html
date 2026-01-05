@@ -1,86 +1,391 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Anti-Valentine's Day</title>
-  <link rel="stylesheet" href="./valentine.css">
-  <style>
-    body {
-      background: white !important;
-      color: black !important;
-    }
-    .nav-bar, .header, .card, .btn, .reason-btn {
-      background: white !important;
-      color: black !important;
-      border-color: black !important;
-    }
-    .title {
-      background: linear-gradient(45deg, black, white) !important;
-      -webkit-background-clip: text !important;
-      -webkit-text-fill-color: transparent !important;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anti-Valentine's Arcade</title>
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at top left, #111, #000);
+  color: white;
+  overflow-x: hidden;
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #111;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 2px solid darkred;
+}
+.nav-link { color: white; text-decoration: none; font-size: 1.1rem; transition: 0.2s; }
+.nav-link:hover { color: red; transform: scale(1.3);}
+.nav-link.active { font-weight: bold; text-decoration: underline;}
+
+.header {
+  text-align: center; padding: 2rem;
+  background: #222; 
+  border-bottom: 2px solid darkred;
+}
+.title {
+  font-size: 3rem;
+  cursor: pointer;
+  color: #ddd; 
+  transition: 0.3s;
+}
+.title:hover { transform: scale(1.2); color: white; }
+
+.card {
+  background: rgba(0,0,0,0.75); margin: 2rem auto; padding: 2rem;
+  border-radius: 15px; max-width: 650px; text-align: center; position: relative;
+  z-index: 10; box-shadow: 0 0 15px rgba(255,0,0,0.3); transition: transform 0.3s;
+}
+.card:hover { transform: scale(1.02); }
+
+.card h3 {
+  color: #ddd;
+  cursor: pointer;
+  transition: transform 0.2s, color 0.3s;
+}
+.card h3:hover { transform: scale(1.1); color: red; }
+
+.reason-btn {
+  margin: 0.5rem; padding: 0.6rem 1.2rem; border: 2px solid white;
+  background: transparent; color: white; cursor: pointer; transition: 0.3s;
+  border-radius: 8px; font-size: 1rem;
+}
+.reason-btn:hover { background: red; color: black; transform: scale(1.15);}
+.reason-btn.selected { background: red; color: black; border-color: red; font-weight: bold;}
+
+canvas {
+  display: block; margin: 1rem auto; background: #222;
+  border: 2px solid white; border-radius: 10px;
+  transition: transform 0.05s;
+}
+
+.page-footer { text-align: center; margin: 2rem 0; font-size: 0.9rem; opacity: 0.7;}
+
+.particle {
+  position: absolute; border-radius: 50%; opacity: 0.9; width: 5px; height: 5px; pointer-events: none;
+}
+
+.heart {
+  position: absolute; width: 20px; height: 20px; background: red;
+  clip-path: polygon(50% 0%, 61% 10%, 70% 25%, 70% 40%, 50% 60%, 30% 40%, 30% 25%, 39% 10%);
+  animation: floatHeart linear infinite; opacity: 0.8;
+}
+@keyframes floatHeart {
+  0% { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 0.8;}
+  50% { transform: translateY(-300px) rotate(180deg) scale(1); opacity: 1;}
+  100% { transform: translateY(-600px) rotate(360deg) scale(0.8); opacity: 0;}
+}
+</style>
 </head>
 <body>
+<div id="hearts"></div>
+
   <nav class="nav-bar">
     <a href="valentine.html" class="nav-link">Facts</a>
-    <a href="game.html" class="nav-link">Game</a>
-    <a href="anti-valentine.html" class="nav-link active">Anti-Valentine</a>
+    <a href="game.html" class="nav-link active">Game</a>
+    <a href="anti-valentine.html" class="nav-link">Anti-Valentine</a>
   </nav>
 
-  <header class="header" id="siteHeader">
-    <div class="title-container">
-      <h1 class="title" id="mainTitle">Anti-Valentine's Day</h1>
-      <p class="subtitle">For those who aren't feeling the love</p>
+<header class="header">
+  <h1 class="title" id="mainTitle">Anti-Valentine's Arcade</h1>
+  <p>For those who aren't feeling the love</p>
+</header>
+
+<main class="content">
+  <section class="hero card">
+    <h3>Why Do You Hate Valentine's Day?</h3>
+    <div class="options">
+      <button class="reason-btn" data-reason="too many to please">Too many to please</button>
+      <button class="reason-btn" data-reason="nobody to spend it with">Nobody to spend it with</button>
+      <button class="reason-btn" data-reason="not romantic">Not romantic</button>
+      <button class="reason-btn" data-reason="other">Other</button>
     </div>
-  </header>
+    <p id="selectedReason">Selected: None</p>
+    <p id="adviceText"></p>
+  </section>
 
-  <main class="content">
-    <section class="hero card" role="region" aria-label="Anti-Valentine Intro">
-      <h2>Why Do You Hate Valentine's Day?</h2>
-      <p>Let us know your reason!</p>
-      <div class="options">
-        <button class="reason-btn" data-reason="too many to please">Too many to please</button>
-        <button class="reason-btn" data-reason="nobody to spend it with">Nobody to spend it with</button>
-        <button class="reason-btn" data-reason="not romantic">Not romantic</button>
-        <button class="reason-btn" data-reason="other">Other</button>
-      </div>
-      <p id="selectedReason">Selected: None</p>
-    </section>
+  <section class="advice card">
+    <h3>Our Advice:</h3>
+    <p id="staticAdvice">Turn off love notifications and play games instead!</p>
+  </section>
 
-    <section class="advice card">
-      <h3>Our Advice:</h3>
-      <p>Just get a bae or listen to Drake. If not, turn into future.</p>
-    </section>
+  <section class="game-container card">
+    <h3>Catch the Falling Blocks!</h3>
+    <p>Use left/right arrows to move your bucket. Catch blocks to score points.</p>
+    <canvas id="catchGame" width="400" height="400"></canvas>
+    <p id="catchScore">Score: 0 | Lives: 3 | High: 0</p>
+  </section>
 
-    <footer class="page-footer">Remember, love is everywhere!</footer>
-  </main>
+  <section class="game-container card">
+    <h3>Heart Destroyer!</h3>
+    <p>Click on hearts to smash them!</p>
+    <canvas id="heartGame" width="400" height="400"></canvas>
+    <p id="heartScore">Score: 0</p>
+  </section>
 
-  <script>
-    // Interactive features
-    const mainTitle = document.getElementById('mainTitle');
-    
-    // Title click changes gradient speed
-    mainTitle.addEventListener('click', () => {
-      mainTitle.style.animation = 'gradientShift 0.5s ease infinite, pulse 3s infinite';
-      setTimeout(() => {
-        mainTitle.style.animation = 'gradientShift 3s ease infinite, pulse 3s infinite';
-      }, 2000);
+  <section class="game-container card">
+    <h3>Anti-Love Shooter!</h3>
+    <p>Use arrow keys to move and spacebar to shoot lasers!</p>
+    <canvas id="shooterGame" width="400" height="400"></canvas>
+    <p id="shooterScore">Score: 0 | High: 0</p>
+  </section>
+
+  <footer class="page-footer">Remember, love is everywhere—even if you hate it!</footer>
+</main>
+
+<!-- Sounds -->
+<audio id="smashSound" src="https://freesound.org/data/previews/256/256113_3263906-lq.mp3"></audio>
+<audio id="shootSound" src="https://freesound.org/data/previews/320/320181_5260873-lq.mp3"></audio>
+<audio id="hitSound" src="https://freesound.org/data/previews/176/176974_2859970-lq.mp3"></audio>
+<audio id="explosionSound" src="https://freesound.org/data/previews/320/320655_5260873-lq.mp3"></audio>
+
+<script>
+// ---------------- Floating Hearts ----------------
+const heartsContainer = document.getElementById('hearts');
+function createHeart(){ 
+  const h=document.createElement('div'); 
+  h.className='heart'; 
+  h.style.left=Math.random()*window.innerWidth+'px'; 
+  h.style.animationDuration=2+Math.random()*3+'s'; 
+  heartsContainer.appendChild(h); 
+  setTimeout(()=>h.remove(),5000);
+}
+setInterval(createHeart,200);
+
+// ---------------- Title Animation ----------------
+const mainTitle = document.getElementById('mainTitle');
+mainTitle.addEventListener('click',()=>{ mainTitle.style.transform='scale(1.3)'; setTimeout(()=>mainTitle.style.transform='scale(1)',500); });
+
+// ---------------- Reason Selection ----------------
+const reasonBtns = document.querySelectorAll('.reason-btn');
+const selectedReason = document.getElementById('selectedReason');
+const adviceText = document.getElementById('adviceText');
+const adviceMap = {
+  "too many to please":"Focus on yourself—pamper yourself!",
+  "nobody to spend it with":"Treat yourself to your favorite activities!",
+  "not romantic":"Play fun games with friends instead!",
+  "other":"Do something unexpected and fun!"
+};
+reasonBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    reasonBtns.forEach(b=>b.classList.remove('selected'));
+    btn.classList.add('selected');
+    selectedReason.textContent='Selected: '+btn.dataset.reason;
+    adviceText.textContent=adviceMap[btn.dataset.reason];
+    for(let i=0;i<50;i++){
+      const p=document.createElement('div'); p.className='particle';
+      const colors=['red','orange','yellow','green','cyan','magenta'];
+      p.style.background=colors[Math.floor(Math.random()*colors.length)];
+      p.style.left=Math.random()*window.innerWidth+'px';
+      p.style.top=Math.random()*window.innerHeight+'px';
+      document.body.appendChild(p);
+      setTimeout(()=>p.remove(),1000);
+    }
+  });
+});
+
+// ---------------- Particle Explosion ----------------
+function createParticleExplosion(x,y,color){
+  for(let i=0;i<30;i++){
+    const p=document.createElement('div'); p.className='particle';
+    const colors=['red','orange','yellow','green','cyan','magenta'];
+    p.style.background=colors[Math.floor(Math.random()*colors.length)];
+    p.style.left=x+'px'; p.style.top=y+'px';
+    document.body.appendChild(p);
+    let angle=Math.random()*2*Math.PI;
+    let speed=Math.random()*5; let vx=Math.cos(angle)*speed; let vy=Math.sin(angle)*speed;
+    let lifetime=0;
+    const anim=setInterval(()=>{
+      lifetime++;
+      p.style.left=parseFloat(p.style.left)+vx+'px'; 
+      p.style.top=parseFloat(p.style.top)+vy+'px';
+      p.style.opacity=(1-lifetime/40);
+      if(lifetime>40){ clearInterval(anim); p.remove();}
+    },16);
+  }
+}
+
+// ---------------- Screen Shake ----------------
+function screenShake(canvas, intensity=5, duration=200){
+  const start = Date.now();
+  const originalStyle = canvas.style.transform;
+  const shakeInterval = setInterval(()=>{
+    const elapsed = Date.now() - start;
+    if(elapsed >= duration){ clearInterval(shakeInterval); canvas.style.transform=originalStyle; return; }
+    const x = (Math.random()*2-1)*intensity;
+    const y = (Math.random()*2-1)*intensity;
+    canvas.style.transform=`translate(${x}px, ${y}px)`;
+  },16);
+}
+
+// ---------------- Catch Game ----------------
+const catchCanvas=document.getElementById('catchGame');
+const cCtx=catchCanvas.getContext('2d');
+const bucket={x:180,y:370,width:50,height:20};
+let blocks=[], catchScore=0, lives=3, blockSpeed=3, highestCatchScore=0;
+
+document.addEventListener('keydown',e=>{ 
+  if(e.key==='ArrowLeft') bucket.x-=20; 
+  if(e.key==='ArrowRight') bucket.x+=20; 
+  if(bucket.x<0) bucket.x=0; 
+  if(bucket.x>catchCanvas.width-bucket.width) bucket.x=catchCanvas.width-bucket.width;
+});
+
+function spawnBlock(){
+  const colors=['red','orange','yellow','cyan','magenta'];
+  if(lives>0) blocks.push({x:Math.random()*(catchCanvas.width-20),y:-20,width:20,height:20,speed:blockSpeed,color:colors[Math.floor(Math.random()*colors.length)]});
+}
+
+function updateCatchScoreDisplay(){
+  document.getElementById('catchScore').textContent=`Score: ${catchScore} | Lives: ${lives} | High: ${highestCatchScore}`;
+}
+
+function updateCatchGame(){
+  cCtx.clearRect(0,0,catchCanvas.width,catchCanvas.height);
+  cCtx.fillStyle='white'; cCtx.fillRect(bucket.x,bucket.y,bucket.width,bucket.height);
+
+  for(let i=blocks.length-1;i>=0;i--){
+    let b=blocks[i]; 
+    b.y+=b.speed; 
+    cCtx.fillStyle=b.color; 
+    cCtx.fillRect(b.x,b.y,b.width,b.height);
+
+    if(b.y+b.height>bucket.y && b.x+b.width>bucket.x && b.x<bucket.x+bucket.width){
+      blocks.splice(i,1); 
+      catchScore++; 
+      blockSpeed=3+catchScore*0.3;
+      if(catchScore>highestCatchScore) highestCatchScore=catchScore;
+      createParticleExplosion(b.x,b.y,'orange');
+      screenShake(catchCanvas, 4, 150);
+      explosionSound.play();
+      updateCatchScoreDisplay();
+    }
+
+    if(b.y>catchCanvas.height){
+      blocks.splice(i,1); 
+      lives--;
+      updateCatchScoreDisplay();
+      if(lives===0){
+        catchScore=0; lives=3; blockSpeed=3; blocks=[];
+        updateCatchScoreDisplay();
+      }
+    }
+  }
+  requestAnimationFrame(updateCatchGame);
+}
+setInterval(spawnBlock,900); updateCatchGame();
+
+// ---------------- Heart Destroyer ----------------
+const heartCanvas=document.getElementById('heartGame');
+const hCtx=heartCanvas.getContext('2d'); let heartsArr=[], heartScore=0;
+class HeartObj {
+  constructor() { this.x=Math.random()*(heartCanvas.width-30); this.y=Math.random()*(heartCanvas.height-30); this.size=20+Math.random()*20; this.speedY=1+Math.random()*2;}
+  draw() { hCtx.fillStyle='red'; hCtx.beginPath(); const t=this.size*0.3;
+    hCtx.moveTo(this.x,this.y+t); hCtx.bezierCurveTo(this.x,this.y,this.x-this.size/2,this.y,this.x-this.size/2,this.y+t);
+    hCtx.bezierCurveTo(this.x-this.size/2,this.y+(this.size+t)/2,this.x,this.y+(this.size+t)/2,this.x,this.y+this.size);
+    hCtx.bezierCurveTo(this.x,this.y+(this.size+t)/2,this.x+this.size/2,this.y+(this.size+t)/2,this.x+this.size/2,this.y+t);
+    hCtx.bezierCurveTo(this.x+this.size/2,this.y,this.x,this.y,this.x,this.y+t); hCtx.closePath(); hCtx.fill();
+  }
+  update() { this.y+=this.speedY; if(this.y>heartCanvas.height){this.y=-this.size; this.x=Math.random()*(heartCanvas.width-this.size);} this.draw();}
+  isClicked(mx,my){ return Math.sqrt((mx-this.x)**2 + (my-this.y)**2)<this.size; }
+}
+function spawnHearts(n){for(let i=0;i<n;i++)heartsArr.push(new HeartObj());}
+heartCanvas.addEventListener('click', e=>{
+  const rect=heartCanvas.getBoundingClientRect();
+  const mx=e.clientX-rect.left, my=e.clientY-rect.top;
+  heartsArr.forEach((h,i)=>{
+    if(h.isClicked(mx,my)){
+      heartsArr.splice(i,1); heartScore++; 
+      createParticleExplosion(h.x,h.y,'red');
+      screenShake(heartCanvas, 5, 150);
+      document.getElementById('heartScore').textContent=`Score: ${heartScore}`;
+      smashSound.play(); 
+      heartsArr.push(new HeartObj());
+    }
+  });
+});
+function animateHearts(){hCtx.clearRect(0,0,heartCanvas.width,heartCanvas.height); heartsArr.forEach(h=>h.update()); requestAnimationFrame(animateHearts);}
+spawnHearts(12); animateHearts();
+
+// ---------------- Shooter ----------------
+const shooterCanvas=document.getElementById('shooterGame');
+const sCtx=shooterCanvas.getContext('2d'); 
+const shooter={x:180,y:350,width:30,height:20}; 
+let bullets=[], targets=[], shooterScore=0, highestShooterScore=0;
+
+document.addEventListener('keydown', e=>{
+  if(e.key==='ArrowLeft') shooter.x-=15;
+  if(e.key==='ArrowRight') shooter.x+=15;
+  if(shooter.x<0) shooter.x=0;
+  if(shooter.x>shooterCanvas.width-shooter.width) shooter.x=shooterCanvas.width-shooter.width;
+  if(e.key===' '){ bullets.push({x:shooter.x+shooter.width/2-2, y:shooter.y, width:4, height:10}); shootSound.play(); }
+});
+
+function spawnTargets(){
+  const colors=['red','orange','yellow','cyan','magenta'];
+  targets.push({x:Math.random()*(shooterCanvas.width-20),y:0,width:20,height:20,color:colors[Math.floor(Math.random()*colors.length)]});
+}
+
+function updateShooterScoreDisplay(){
+  document.getElementById('shooterScore').textContent=`Score: ${shooterScore} | High: ${highestShooterScore}`;
+}
+
+function updateShooterGame(){
+  sCtx.clearRect(0,0,shooterCanvas.width,shooterCanvas.height);
+  sCtx.fillStyle='white'; sCtx.shadowBlur=15; sCtx.shadowColor='cyan';
+  sCtx.fillRect(shooter.x, shooter.y, shooter.width, shooter.height);
+  sCtx.shadowBlur=0;
+
+  bullets.forEach((b,i)=>{
+    b.y-=5; sCtx.fillStyle='cyan'; sCtx.fillRect(b.x,b.y,b.width,b.height); 
+    if(b.y<0) bullets.splice(i,1);
+  });
+
+  targets.forEach((t,j)=>{
+    t.y+=2; sCtx.fillStyle=t.color; sCtx.fillRect(t.x,t.y,t.width,t.height);
+
+    bullets.forEach((b,k)=>{
+      if(b.x<b.width+t.x && b.x+b.width>t.x && b.y<b.height+t.y && b.y+b.height>t.y){
+        bullets.splice(k,1); targets.splice(j,1); 
+        shooterScore++; 
+        if(shooterScore>highestShooterScore) highestShooterScore=shooterScore;
+        createParticleExplosion(t.x+t.width/2,t.y+t.height/2,'yellow'); 
+        screenShake(shooterCanvas, 5, 150);
+        hitSound.play(); explosionSound.play();
+        updateShooterScoreDisplay();
+      }
     });
 
-    // Reason selection
-    const reasonBtns = document.querySelectorAll('.reason-btn');
-    const selectedReason = document.getElementById('selectedReason');
+    if(t.y>shooterCanvas.height){ targets.splice(j,1);}
+  });
 
-    reasonBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        reasonBtns.forEach(b => b.classList.remove('selected'));
-        btn.classList.add('selected');
-        selectedReason.textContent = 'Selected: ' + btn.dataset.reason;
-      });
-    });
-  </script>
+  requestAnimationFrame(updateShooterGame);
+}
+
+setInterval(spawnTargets,900); updateShooterGame();
+
+// ---------------- Highlight Active Nav Link ----------------
+const navLinks = document.querySelectorAll('.nav-link');
+const currentPage = window.location.pathname.split('/').pop(); // gets current file name
+
+navLinks.forEach(link => {
+  const linkPage = link.getAttribute('href');
+  if(linkPage === currentPage) {
+    link.classList.add('active');
+  } else {
+    link.classList.remove('active');
+  }
+});
+</script>
 </body>
-</html></content>
-<parameter name="filePath">/workspaces/unit-3-lesson-5-6-holiday-routes-kashdestinyy/public/anti-valentine.html
+</html>
